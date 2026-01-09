@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppTitle" xml:space="preserve">
+    <value>osu!converter Std2Taiko</value>
+  </data>
+  <data name="InputFile" xml:space="preserve">
+    <value>入力ファイル</value>
+  </data>
+  <data name="OutputMode" xml:space="preserve">
+    <value>出力モード</value>
+  </data>
+  <data name="Convert" xml:space="preserve">
+    <value>変換開始</value>
+  </data>
+  <data name="ModeStable" xml:space="preserve">
+    <value>osu! stable</value>
+  </data>
+  <data name="ModeLazer" xml:space="preserve">
+    <value>osu! lazer</value>
+  </data>
+  <data name="ModeOriginal" xml:space="preserve">
+    <value>original（デバック用）</value>
+  </data>
+  <data name="LazerSafe" xml:space="preserve">
+    <value>セーフモード（Aspire譜面用）</value>
+  </data>
+  <data name="UiSvaEnable" xml:space="preserve">
+    <value>BPM 調整を許可する</value>
+  </data>
+  <data name="ConstantSpeed" xml:space="preserve">
+    <value>等速譜面を追加で出力する</value>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>完了</value>
+  </data>
+  <data name="ErrNotStandard" xml:space="preserve">
+    <value>osu!standard（Mode: 0）の譜面のみ変換できます。</value>
+  </data>
+  <data name="MsgConvertErrorTitle" xml:space="preserve">
+    <value>変換エラー</value>
+  </data>
+  <data name="MsgConvertSuccessBody" xml:space="preserve">
+    <value>正常に変換されました。</value>
+  </data>
+  <data name="InvalidInputFile" xml:space="preserve">
+    <value>入力ファイルが無効です</value>
+  </data>
+  <data name="DropHint" xml:space="preserve">
+    <value>ここに .osu をドラッグ＆ドロップ（クリックで参照）</value>
+  </data>
+  <data name="DropNow" xml:space="preserve">
+    <value>ここにドロップして選択</value>
+  </data>
+  <data name="LogOk" xml:space="preserve">
+    <value>OK: {0} -&gt; {1}</value>
+  </data>
+  <data name="LogOutput" xml:space="preserve">
+    <value>Output: {0}</value>
+  </data>
+  <data name="LogNg" xml:space="preserve">
+    <value>NG: {0} : {1}</value>
+  </data>
+  <data name="LogOkConstantSpeed" xml:space="preserve">
+    <value>OK (Constant speed): {0} -&gt; {1}</value>
+  </data>
+  <data name="CsClampWarnHeader" xml:space="preserve">
+    <value>⚠ 注意: SV が上限に到達する区間を検出しました。完全な等速を実現したい場合は 「BPM 調整を許可する」を使用して下さい。</value>
+  </data>
+  <data name="SvaSkipNote" xml:space="preserve">
+    <value>ℹ SV 上限を超える区間が無かったため BPM 調整は行われませんでした</value>
+  </data>
+  <data name="CsClampWarnLine" xml:space="preserve">
+    <value>{0}</value>
+  </data>
+  <data name="SvaWarnHeader" xml:space="preserve">
+    <value>⚠ 注意: SV 演出（緑線変化）がある区間を補正しました</value>
+  </data>
+  <data name="SvaWarnSegment" xml:space="preserve">
+    <value>区間 t={0}..{1} x{2} SV 線={3} 補完={4}</value>
+  </data>
+  <data name="SvaWarnNote" xml:space="preserve">
+    <value>BPM 調整に合わせてSV 線の beatLength を倍率分スケールします。この区間の SV 演出は見た目が変わります。</value>
+  </data>
+  <data name="SvaWarnGreenLine" xml:space="preserve">
+    <value>  SV線: {0}</value>
+  </data>
+  <data name="SvaRollSwellWarnHeader" xml:space="preserve">
+    <value>⚠ 注意: BPM 調整区間に DrumRoll / Swell が多い可能性があります</value>
+  </data>
+  <data name="SvaRollSwellWarnLine" xml:space="preserve">
+    <value>区間 t={0}..{1} DrumRoll={2} Swell={3} Objects={4}</value>
+  </data>
+  <data name="SvaRollSwellWarnNote" xml:space="preserve">
+    <value>BPM 調整 ＋ SV 線補正により、 DrumRoll / Swell の見た目・体感が通常とズレる場合があります（要確認）。</value>
+  </data>
+  <data name="SvaReplaceHeader" xml:space="preserve">
+    <value>ℹ BPM 線を置換しました（安定化のため）</value>
+  </data>
+  <data name="SvaReplaceLine" xml:space="preserve">
+    <value>区間 t={0}..{1} x{2} BPM {3:0.########} → {4:0.########}（BPM 線統合={5}, SV線補完={6}）</value>
+  </data>
+</root>
