@@ -1,3 +1,7 @@
+using System;
+using System.IO;
+using System.Windows.Forms;
+
 namespace OsuStdToTaikoGui
 {
     internal static class Program
@@ -5,33 +9,19 @@ namespace OsuStdToTaikoGui
         [STAThread]
         static void Main()
         {
-            System.IO.File.AppendAllText(
-                "C:\\osu-tools\\OsuStdToTaikoGui\\startup.log",
-                DateTime.Now.ToString("s") + " Main reached" + Environment.NewLine);
-
             try
             {
-                ApplicationConfiguration.Initialize();
-
-                var f = new MainForm();
-                System.IO.File.AppendAllText(
-                    "C:\\osu-tools\\OsuStdToTaikoGui\\startup.log",
-                    DateTime.Now.ToString("s") + " Form created" + Environment.NewLine);
-
-                Application.Run(f);
-
-                System.IO.File.AppendAllText(
-                    "C:\\osu-tools\\OsuStdToTaikoGui\\startup.log",
-                    DateTime.Now.ToString("s") + " Run returned" + Environment.NewLine);
+                string logPath = Path.Combine(AppContext.BaseDirectory, "startup.log");
+                File.AppendAllText(logPath,
+                    $"{DateTime.Now:yyyy-MM-dd HH:mm:ss} - Started{Environment.NewLine}");
             }
-            catch (Exception ex)
+            catch
             {
-                System.IO.File.AppendAllText(
-                    "C:\\osu-tools\\OsuStdToTaikoGui\\startup.log",
-                    DateTime.Now.ToString("s") + " EX: " + ex + Environment.NewLine);
-
-                MessageBox.Show(ex.ToString(), "Startup error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // ÉçÉOèëÇ´çûÇ›Ç…é∏îsÇµÇƒÇ‡ÉAÉvÉäÇÕóéÇ∆Ç≥Ç»Ç¢
             }
+
+            ApplicationConfiguration.Initialize();
+            Application.Run(new MainForm());
         }
     }
 }
