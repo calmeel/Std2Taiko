@@ -68,6 +68,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyName>Std2Taiko</AssemblyName>
     <AssemblyTitle>osu! Std → Taiko Converter</AssemblyTitle>
+    <ApplicationIcon>Assets\app.ico</ApplicationIcon>
   </PropertyGroup>
 	
 </Project>
