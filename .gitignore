@@ -368,6 +368,8 @@ obj/
 publish/
 .vs/
 .vscode/
+Realeases/
 *.exe
 *.pdb
 *.zip
+/Realeases

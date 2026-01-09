@@ -32,8 +32,9 @@
         {
             try
             {
+                string logPath = Path.Combine(AppContext.BaseDirectory, "startup.log");
                 File.AppendAllText(
-                    @"C:\osu-tools\OsuStdToTaikoGui\startup.log",
+                    logPath,
                     DateTime.Now.ToString("s") + " " + msg + Environment.NewLine);
             }
             catch
