@@ -1,2 +1,0 @@
-This application bundles Noto Sans JP and Aller fonts.
-Licensed under SIL Open Font License 1.1.
