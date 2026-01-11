@@ -20,7 +20,7 @@ namespace OsuStdToTaikoGui
 
             string baseDir = AppContext.BaseDirectory;
             string jpPath = Path.Combine(baseDir, "Fonts", "NotoSansJP-Medium.otf");
-            string enPath = Path.Combine(baseDir, "Fonts", "Aller-Regular.ttf");
+            string enPath = Path.Combine(baseDir, "Fonts", "Aller-Rg.ttf");
 
             try
             {
