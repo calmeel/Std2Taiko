@@ -1,6 +1,7 @@
 # Std2Taiko
 <p align="left"><img src="Images/Logo.png"></p>  
 <p align="left"><img src="Images/UserInterface.png"></p>
+<p align="left"><img src="Images/screenshot.jpg"></p>
 
 osu!standard の taiko コンバート譜面を osu!taiko フォーマットに変換するツールです。  
 オプションで等速（constant-speed）譜面の出力にも対応。
