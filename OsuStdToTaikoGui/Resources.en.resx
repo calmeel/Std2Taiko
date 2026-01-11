@@ -145,7 +145,7 @@
     <value>Allow BPM adjustment</value>
   </data>
   <data name="ConstantSpeed" xml:space="preserve">
-    <value>Also export Constant speed version</value>
+    <value>Also export constant speed version</value>
   </data>
   <data name="Done" xml:space="preserve">
     <value>Done</value>
