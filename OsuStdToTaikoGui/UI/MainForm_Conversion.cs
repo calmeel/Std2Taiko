@@ -8,80 +8,10 @@ namespace OsuStdToTaikoGui
         // ボタン→変換起動
         void OnRunClick(object? sender, EventArgs e) => RunConvert();
 
-
-        // constant speed 1回分の出力結果
-        private readonly struct CsExportResult
-        {
-            public readonly string FinalPath;
-            public readonly string? Version;
-            public readonly string CsText;
-
-            public CsExportResult(string finalPath, string? version, string csText)
-            {
-                FinalPath = finalPath;
-                Version = version;
-                CsText = csText;
-            }
-        }
-
-        // 共通：1回分の constant speed 出力を行い、最終パスとVersionと本文を返す
-        private CsExportResult ExportConstantSpeedOne(
-            string inPath,
-            string outDir,
-            OutputMode outputMode,
-            bool lazerSafe,
-            bool enableSvaForThisRun
-        )
-        {
-            // tmp名はユニークにする（2回呼ぶため衝突回避）
-            string tmpName = $"__tmp_cs_{(enableSvaForThisRun ? "adj" : "base")}_{Guid.NewGuid():N}.osu";
-            string tmpPath = Path.Combine(outDir, tmpName);
-
-            // Convert
-            ConverterCore.ConvertFile(
-                inPath,
-                tmpPath,
-                outputMode,
-                lazerSafe,
-                constantSpeed: true,
-                enableSva: enableSvaForThisRun
-            );
-
-            // 出力された .osu を読む
-            string text = File.ReadAllText(tmpPath, Encoding.UTF8);
-            string? ver = TryReadMetadataVersion(text);
-
-            // 最終ファイル名：入力の [Diff] を version に置換（取れなければ tmp名のまま）
-            // ※ここはあなたの現行 RunConvert 内ローカル関数と互換
-            string finalName = (ver != null)
-                ? ReplaceBracketDifficulty(Path.GetFileName(inPath), ver)
-                : tmpName;
-
-            string finalPath = Path.Combine(outDir, finalName);
-
-            // リネーム（同名があれば上書き）
-            if (!finalPath.Equals(tmpPath, StringComparison.OrdinalIgnoreCase))
-            {
-                if (File.Exists(finalPath))
-                    File.Delete(finalPath);
-
-                File.Move(tmpPath, finalPath);
-            }
-
-            // ★返す text は finalPath の内容と同一（Move後も中身は同じ）
-            return new CsExportResult(finalPath, ver, text);
-        }
-
         // 共通：クランプ警告を csText から拾って出す
         private void ShowClampWarningsFromText(string csText)
         {
-            var clampLines = csText
-                .Replace("\r\n", "\n")
-                .Split('\n')
-                .Select(l => l.TrimEnd())
-                .Where(l => l.StartsWith("// [ConstantSpeed] SV clamped") && !l.Contains("(summary)"))
-                .Distinct()
-                .ToList();
+            var clampLines = ConversionHelpers.ExtractClampWarningLines(csText);
 
             if (clampLines.Count > 0)
             {
@@ -96,14 +26,12 @@ namespace OsuStdToTaikoGui
         {
             try
             {
-                var appliedSegs = StableVisualAssist.DetectAppliedSvaSegments(csText);
+                var result = ConversionHelpers.AnalyzeSvaFromText(csText);
+
+                var rep = result.ReplacementSegments;
+                var effWarns = result.EffectWarnings;
 
                 // --- SVA: redline replacement info (BPM A -> B) ---
-                var rep = appliedSegs
-                    .Where(s => s.Multiplier > 1 && s.OldBpm > 0 && s.NewBpm > 0)
-                    .OrderBy(s => s.StartTimeMs)
-                    .ToList();
-
                 if (rep.Count > 0)
                 {
                     LogColored(T("SvaReplaceHeader"), LogWarnColor);
@@ -129,13 +57,6 @@ namespace OsuStdToTaikoGui
                     }
                 }
                 // --- /SVA: redline replacement info ---
-
-                var effWarns = StableVisualAssist.DetectGreenlineEffectWarnings(
-                    csText,
-                    appliedSegs,
-                    multiplierHint: 0,
-                    insertedGreenlineCount: 0
-                );
 
                 if (effWarns.Any())
                 {
@@ -185,7 +106,7 @@ namespace OsuStdToTaikoGui
 
             // osu!standard 譜面以外は弾く
             string osuText = File.ReadAllText(inPath, Encoding.UTF8);
-            int beatmapMode = GetGeneralModeOrDefault(osuText);
+            int beatmapMode = OsuFileHelpers.GetGeneralModeOrDefault(osuText);
 
             if (beatmapMode != 0)
             {
@@ -203,7 +124,7 @@ namespace OsuStdToTaikoGui
             bool constantSpeed = chkConstantSpeed.Checked;
 
             // 通常出力
-            string outName = MakeTaikoOutputFileName(Path.GetFileName(inPath), constantSpeed: false, adjusted: false);
+            string outName = OsuFileHelpers.MakeTaikoOutputFileName(Path.GetFileName(inPath), constantSpeed: false, adjusted: false);
             string outPath = Path.Combine(outDir, outName);
 
             try
@@ -222,7 +143,7 @@ namespace OsuStdToTaikoGui
                     // -------------------------
                     // 1) base: (constant speed) を必ず出す
                     // -------------------------
-                    var baseOut = ExportConstantSpeedOne(
+                    var baseOut = ConversionHelpers.ExportConstantSpeedOne(
                         inPath: inPath,
                         outDir: outDir,
                         outputMode: outputMode,
@@ -244,7 +165,7 @@ namespace OsuStdToTaikoGui
                     // -------------------------
                     if (enableAdjustUi)
                     {
-                        var adjOut = ExportConstantSpeedOne(
+                        var adjOut = ConversionHelpers.ExportConstantSpeedOne(
                             inPath: inPath,
                             outDir: outDir,
                             outputMode: outputMode,
@@ -292,7 +213,7 @@ namespace OsuStdToTaikoGui
                             {
                                 string adjText = adjOut.CsText;
                                 var appliedSegs = StableVisualAssist.DetectAppliedSvaSegments(adjText);
-                                var counts = CountRollAndSwellInSegments(adjText, appliedSegs);
+                                var counts = OsuFileHelpers.CountRollAndSwellInSegments(adjText, appliedSegs);
 
                                 // 閾値：とりあえず「区間内で slider+spinner が 3 以上」または「区間内オブジェクトの 30% 以上が roll/swell」
                                 const int ABS_THRESHOLD = 3;

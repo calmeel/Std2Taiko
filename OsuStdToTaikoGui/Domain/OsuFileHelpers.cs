@@ -1,11 +1,16 @@
 ﻿using OsuStdToTaiko;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace OsuStdToTaikoGui
 {
-    public partial class MainForm : Form
+    internal static class OsuFileHelpers
     {
         // 標準譜面判定ヘルパ
-        static int GetGeneralModeOrDefault(string osuText)
+        internal static int GetGeneralModeOrDefault(string osuText)
         {
             // [General] セクション中の "Mode:" を探す。無ければ 0 扱い（standard）
             bool inGeneral = false;
@@ -37,9 +42,8 @@ namespace OsuStdToTaikoGui
             return 0;
         }
 
-
         // 命名関数
-        static string MakeTaikoOutputFileName(string inputFileName, bool constantSpeed, bool adjusted)
+        internal static string MakeTaikoOutputFileName(string inputFileName, bool constantSpeed, bool adjusted)
         {
             var name = Path.GetFileNameWithoutExtension(inputFileName);
 
@@ -55,7 +59,7 @@ namespace OsuStdToTaikoGui
 
 
         // Suffix ヘルパー
-        static string? TryReadMetadataVersion(string osuText)
+        internal static string? TryReadMetadataVersion(string osuText)
         {
             bool inMeta = false;
 
@@ -81,7 +85,7 @@ namespace OsuStdToTaikoGui
         }
 
         // "Artist - Title (Mapper) [Diff].osu" の [Diff] 部分だけを version に置換する
-        static string ReplaceBracketDifficulty(string inputFileName, string version)
+        internal static string ReplaceBracketDifficulty(string inputFileName, string version)
         {
             string name = Path.GetFileNameWithoutExtension(inputFileName);
             int lb = name.LastIndexOf('[');
@@ -102,7 +106,7 @@ namespace OsuStdToTaikoGui
 
 
         // HitObjectsから区間ごとの slider/spinner を数えるヘルパー
-        private static List<(double start, double end, int sliderCount, int spinnerCount, int totalInSeg)>
+        internal static List<(double start, double end, int sliderCount, int spinnerCount, int totalInSeg)>
         CountRollAndSwellInSegments(string osuText, List<StableVisualAssist.SvaSegment> segs)
         {
             var result = new List<(double, double, int, int, int)>();
